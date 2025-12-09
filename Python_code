@@ -1,0 +1,28 @@
+import base64, hashlib, time, json, requests
+
+def build_payload(username, password, app_secret):
+    token = base64.b64encode(f"{username}::{password}".encode()).decode()
+    ts = str(int(time.time()))
+    signature = hashlib.md5((token + ts + app_secret).encode()).hexdigest()
+    return {"auth_token": token, "timestamp": ts, "signature": signature}
+
+def solve():
+    url = "http://51.195.24.179:5005/api/login"
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "python-requests/2.31.0",
+        # add the client-version header seen in browser
+        "X-Client-Version": "2.1.0"
+    }
+    app_secret = "X9_Pc3_Salt_v2"
+
+    payload = build_payload("intern", "1234", app_secret)
+    print("[*] Sending payload:")
+    print(json.dumps(payload, indent=2))
+
+    r = requests.post(url, json=payload, headers=headers)
+    print("\n[+] Server Response:")
+    print(r.text)
+
+if __name__ == "__main__":
+    solve()
