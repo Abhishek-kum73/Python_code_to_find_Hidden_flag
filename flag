@@ -1,0 +1,10 @@
+[*] Sending payload:
+{
+  "auth_token": "aW50ZXJuOjoxMjM0",
+  "timestamp": "1765304600",
+  "signature": "3e57d962da3a51ac159aaff2ece5c07b"
+}
+
+[+] Server Response:
+{"flag":"FLAG{WEB_SCRAPER_PRO_2025}","message":"Welcome, Engineer.","success":true}
+
